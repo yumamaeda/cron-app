@@ -51,6 +51,10 @@
   background: transparent;
 }
 
+.copy :hover {
+  cursor: pointer;
+}
+
 .save__icon {
   color: #ffffff;
 }
