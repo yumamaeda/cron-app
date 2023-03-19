@@ -1,100 +1,72 @@
 import './App.css';
-import React, { useState } from 'react';
-import { IoIosCopy } from "react-icons/io";
+import React, { useState, useEffect } from 'react';
+import Title from './components/Title';
+import Select from './components/Select';
+import Result from './components/Result';
+import Copy from './components/Copy';
 
+const itemsMonth: number[] = [...Array(12)].map((_, i) => i + 1);
+const itemsDay: number[] = [...Array(31)].map((_, i) => i + 1);
+const itemsWeek = ["月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日", "日曜日"];
+const itemsTime: number[] = [...Array(24)].map((_, i) => i + 1);
+const itemsMinutes: number[] = [...Array(60)].map((_, i) => i + 1);
 
 function App() {
-  const items__month = [...Array(12)].map((_: undefined, i: number) => i + 1)
-  const items__day = [...Array(31)].map((_: undefined, i: number) => i + 1)
-  const items__week = ["月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日", "日曜日"];
-  const items__time = [...Array(24)].map((_: undefined, i: number) => i)
-  const items__minutes = [...Array(60)].map((_: undefined, i: number) => i)
-  const [select__month, setSelectMonth] = useState<string>("*");
-  const change__month = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectMonth(event.target.value);
-    const button = document.getElementById("copy") as HTMLButtonElement;
-    const icon = document.getElementById("save__icon") as HTMLButtonElement;
-    button.removeAttribute("disabled");
-    icon.style.color = "#000000";
-  };
-  const [select__day, setSelectDay] = useState<string>("*");
-  const change__day = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectDay(event.target.value);
-    const button = document.getElementById("copy") as HTMLButtonElement;
-    const icon = document.getElementById("save__icon") as HTMLButtonElement;
-    button.removeAttribute("disabled");
-    icon.style.color = "#000000";
-  };
-  const [select__week, setSelectWeek] = useState<string>("*");
-  const change__week = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectWeek(event.target.value);
-    const button = document.getElementById("copy") as HTMLButtonElement;
-    const icon = document.getElementById("save__icon") as HTMLButtonElement;
-    button.removeAttribute("disabled");
-    icon.style.color = "#000000";
-  };
-  const [select__time, setSelectTime] = useState<string>("*");
-  const change__time = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectTime(event.target.value);
-    const button = document.getElementById("copy") as HTMLButtonElement;
-    const icon = document.getElementById("save__icon") as HTMLButtonElement;
-    button.removeAttribute("disabled");
-    icon.style.color = "#000000";
-  };
-  const [select__minutes, setSelectMinutes] = useState<string>("*");
-  const change__minutes = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectMinutes(event.target.value);
-    const button = document.getElementById("copy") as HTMLButtonElement;
-    const icon = document.getElementById("save__icon") as HTMLButtonElement;
-    button.removeAttribute("disabled");
-    icon.style.color = "#000000";
-  };
+  const [countMonth, setCountMonth] = useState('*');
+  const [countDay, setCountDay] = useState('*');
+  const [countWeek, setCountWeek] = useState('*');
+  const [countTime, setCountTime] = useState('*');
+  const [countMinutes, setCountMinutes] = useState('*');
+  const [toolTip, setToolTip] = useState(false);
+  const [copyButton, setCopyButton] = useState(false);
+  const resultText = `${countMonth} ${countDay} ${countWeek} ${countTime} ${countMinutes}`;
 
-  document.getElementById('copy')?.addEventListener('click', () => {
-    const copy__text = document.getElementById("result") as HTMLInputElement;
-    copy__text.select();
-    navigator.clipboard.writeText(copy__text.value);
-  });
+  useEffect(() => {
+    if (toolTip) {
+      alert('コピーしました!');
+      setToolTip(false);
+    }
+  }, [toolTip]);
+
+  useEffect(() => {
+    if (resultText !== '* * * * *') {
+      setCopyButton(true);
+    }
+  }, [resultText]);
 
   return (
     <div className="body">
-      <div className="app__title">Cron</div>
-      <div className="app__subtitle">Cronを簡単に生成するアプリです。</div>
+      < Title />
       <div className="cron__app">
-        <div className="select__cron">
-          <select className="select__item" value={select__month} onChange={change__month}>
-            <option value="*">毎月</option>
-            {items__month.map((e, index) => {
-              return <option value={index + 1}>{e}月</option>
-            })}
-          </select>
-          <select className="select__item" value={select__day} onChange={change__day}>
-            <option value="*">毎日</option>
-            {items__day.map((e, index) => {
-              return <option value={index + 1}>{e}日</option>
-            })}
-          </select>
-          <select className="select__item" value={select__week} onChange={change__week}>
-            <option value="*">毎週</option>
-            {items__week.map((e, index) => {
-              return <option value={index + 1}>{e}</option>
-            })}
-          </select>
-          <select className="select__item" value={select__time} onChange={change__time}>
-            <option value="*">毎時</option>
-            {items__time.map((e, index) => {
-              return <option value={index}>{e}</option>
-            })}
-          </select>
-          <select className="select__item" value={select__minutes} onChange={change__minutes}>
-            <option value="*">毎分</option>
-            {items__minutes.map((e, index) => {
-              return <option value={index}>{e}</option>
-            })}
-          </select>
+        <div className="cron__menu">
+          <Select
+            name="毎月"
+            items={itemsMonth}
+            setCount={setCountMonth} />
+          <Select
+            name="毎日"
+            items={itemsDay}
+            setCount={setCountDay} />
+          <Select
+            name="毎週"
+            items={itemsWeek}
+            setCount={setCountWeek} />
+          <Select
+            name="毎時"
+            items={itemsTime}
+            setCount={setCountTime} />
+          <Select
+            name="毎分"
+            items={itemsMinutes}
+            setCount={setCountMinutes} />
         </div>
-        <input type="text" id="result" className="select__result" value={select__minutes + " " + select__time + " " + select__day + " " + select__month + " " + select__week} disabled></input>
-        <button id="copy" className="copy"><IoIosCopy id="save__icon" className="save__icon" /></button>
+        <Result
+          resultText={resultText}
+        />
+        {copyButton && <Copy
+          resultText={resultText}
+          setToolTip={setToolTip}
+        />}
       </div>
     </div>
   );
