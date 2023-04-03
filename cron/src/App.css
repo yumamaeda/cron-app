@@ -1,20 +1,20 @@
-.body {
+.cron-app {
   background-color: #ffffff;
   margin: 0 auto;
   text-align: center;
 }
 
-.title {
+.cron-app__title {
   padding-top: 100px;
   font-size: 40px;
   font-weight: bold;
 }
 
-.subtitle {
+.cron-app__subtitle {
   font-size: 15px;
 }
 
-.cron__app {
+.content {
   background-color: #ffffff;
   border: medium solid #dbdeff;
   border-radius: 5px;
@@ -24,11 +24,11 @@
   margin-top: 30px;
 }
 
-.cron__menu {
-  margin: 50px 0px 30px 0px;
+.content__menu {
+  margin: 50px 0px 10px 0px;
 }
 
-.cron__menu select {
+.content__menu select {
   padding: 5px;
   margin-right: 2px;
   border-radius: 1px;
@@ -36,21 +36,29 @@
   box-shadow: 1px 1px 1px #d9d9d9;
 }
 
-.cron__result {
-  height: 30px;
+.content__result {
+  display: flex;
+  width: 180px;
   margin: 0 auto;
+}
+
+.content__select-result {
+  height: 36px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #000000;
   color: #ffffff;
-  text-align: center;
-  font-size: 16px;
+  font-size: 17px;
   border: none;
 }
 
-.cron__copy {
+.content__copy-btn {
   border: none;
   background: transparent;
 }
 
-.cron__copy :hover {
+.content__copy-btn :hover {
   cursor: pointer;
 }

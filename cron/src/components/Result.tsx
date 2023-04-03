@@ -6,7 +6,7 @@ interface Props {
 
 function Result(props: Props) {
   return (
-    <input type="text" id="result" className="cron__result" value={props.resultText} />
+    <p className="content__select-result">{props.resultText}</p>
   )
 }
 

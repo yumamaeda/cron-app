@@ -2,10 +2,10 @@ import React from 'react';
 
 function Title() {
   return (
-    <React.Fragment>
-      <div className="title">Cron</div>
-      <div className="subtitle">Cronを簡単に生成するアプリです。</div>
-    </React.Fragment>
+    <div>
+      <div className="cron-app__title">Cron</div>
+      <div className="cron-app__subtitle">Cronを簡単に生成するアプリです。</div>
+    </div>
   );
 }
 

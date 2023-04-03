@@ -17,56 +17,82 @@ function App() {
   const [countWeek, setCountWeek] = useState('*');
   const [countTime, setCountTime] = useState('*');
   const [countMinutes, setCountMinutes] = useState('*');
-  const [toolTip, setToolTip] = useState(false);
-  const [copyButton, setCopyButton] = useState(false);
+  const [isToolTipVisible, setIsToolTipVisible] = useState(false);
+  const [isCopyEnabled, setIsCopyEnabled] = useState(false);
   const resultText = `${countMonth} ${countDay} ${countWeek} ${countTime} ${countMinutes}`;
 
+  const handleClick = () => {
+    navigator.clipboard.writeText(resultText);
+    setIsToolTipVisible(true);
+  }
+
+  const handleMonthChange = (value: string) => {
+    setCountMonth(value);
+  }
+
+  const handleDayChange = (value: string) => {
+    setCountDay(value);
+  }
+
+  const handleWeekChange = (value: string) => {
+    setCountWeek(value);
+  }
+
+  const handleTimeChange = (value: string) => {
+    setCountTime(value);
+  }
+
+  const handleMinutesChange = (value: string) => {
+    setCountMinutes(value);
+  }
+
   useEffect(() => {
-    if (toolTip) {
+    if (isToolTipVisible) {
       alert('コピーしました!');
-      setToolTip(false);
+      setIsToolTipVisible(false);
     }
-  }, [toolTip]);
+  }, [isToolTipVisible]);
 
   useEffect(() => {
     if (resultText !== '* * * * *') {
-      setCopyButton(true);
+      setIsCopyEnabled(true);
     }
   }, [resultText]);
 
   return (
-    <div className="body">
+    <div className="cron-app">
       < Title />
-      <div className="cron__app">
-        <div className="cron__menu">
+      <div className="content">
+        <div className="content__menu">
           <Select
             name="毎月"
             items={itemsMonth}
-            setCount={setCountMonth} />
+            handleChange={handleMonthChange} />
           <Select
             name="毎日"
             items={itemsDay}
-            setCount={setCountDay} />
+            handleChange={handleDayChange} />
           <Select
             name="毎週"
             items={itemsWeek}
-            setCount={setCountWeek} />
+            handleChange={handleWeekChange} />
           <Select
             name="毎時"
             items={itemsTime}
-            setCount={setCountTime} />
+            handleChange={handleTimeChange} />
           <Select
             name="毎分"
             items={itemsMinutes}
-            setCount={setCountMinutes} />
+            handleChange={handleMinutesChange} />
         </div>
-        <Result
-          resultText={resultText}
-        />
-        {copyButton && <Copy
-          resultText={resultText}
-          setToolTip={setToolTip}
-        />}
+        <div className="content__result">
+          <Result
+            resultText={resultText}
+          />
+          {isCopyEnabled && <Copy
+            handleClick={handleClick}
+          />}
+        </div>
       </div>
     </div>
   );
