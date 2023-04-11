@@ -6,7 +6,7 @@ interface Props {
 
 function Result(props: Props) {
   return (
-    <p className="content__select-result">{props.resultText}</p>
+    <p className="result__text">{props.resultText}</p>
   )
 }
 

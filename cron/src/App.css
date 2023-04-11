@@ -1,16 +1,16 @@
-.cron-app {
+.app-body {
   background-color: #ffffff;
   margin: 0 auto;
   text-align: center;
 }
 
-.cron-app__title {
+.title__main {
   padding-top: 100px;
   font-size: 40px;
   font-weight: bold;
 }
 
-.cron-app__subtitle {
+.title__sub {
   font-size: 15px;
 }
 
@@ -24,11 +24,11 @@
   margin-top: 30px;
 }
 
-.content__menu {
+.pull-down {
   margin: 50px 0px 10px 0px;
 }
 
-.content__menu select {
+.pull-down select {
   padding: 5px;
   margin-right: 2px;
   border-radius: 1px;
@@ -36,13 +36,13 @@
   box-shadow: 1px 1px 1px #d9d9d9;
 }
 
-.content__result {
+.result {
   display: flex;
   width: 180px;
   margin: 0 auto;
 }
 
-.content__select-result {
+.result__text {
   height: 36px;
   width: 160px;
   display: flex;
@@ -54,11 +54,11 @@
   border: none;
 }
 
-.content__copy-btn {
+.result__button {
   border: none;
   background: transparent;
 }
 
-.content__copy-btn :hover {
+.result__button :hover {
   cursor: pointer;
 }

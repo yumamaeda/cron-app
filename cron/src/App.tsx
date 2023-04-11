@@ -60,10 +60,10 @@ function App() {
   }, [resultText]);
 
   return (
-    <div className="cron-app">
+    <div className="app-body">
       < Title />
       <div className="content">
-        <div className="content__menu">
+        <div className="pull-down">
           <Select
             name="毎月"
             items={itemsMonth}
@@ -85,7 +85,7 @@ function App() {
             items={itemsMinutes}
             handleChange={handleMinutesChange} />
         </div>
-        <div className="content__result">
+        <div className="result">
           <Result
             resultText={resultText}
           />

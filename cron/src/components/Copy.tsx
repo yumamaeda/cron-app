@@ -7,7 +7,7 @@ interface Props {
 
 function Copy(props: Props) {
   return (
-    <button className="content__copy-btn" onClick={props.handleClick}><IoIosCopy /></button>
+    <button className="result__button" onClick={props.handleClick}><IoIosCopy /></button>
   )
 }
 
